@@ -36,5 +36,5 @@
 | hikaru-share-tracker 仓库 | `hikaru-share-tracker` | [link](https://github.com/LittleYe233/hikaru-share-tracker) | [link](https://gitee.com/littleye233/hikaru-share-tracker) |
 | hikaru-share-web 仓库 | `hikaru-share-web` | [link](https://github.com/LittleYe233/hikaru-share-web) | [link](https://gitee.com/littleye233/hikaru-share-web) |
 | 项目目标 | `hikaru-share-docs/goals.md` | [link](https://github.com/LittleYe233/hikaru-share-docs/blob/main/goals.md) | [link](https://gitee.com/littleye233/hikaru-share-docs/blob/main/goals.md) |
-| 开发细节 | `hikaru-share-docs/development_details.md` | [link](https://github.com/LittleYe233/hikaru-share-docs/blob/main/development_details.md) | [link](https://gitee.com/littleye233/hikaru-share-docs/blob/main/development_details.md) |
+| 开发细节 | `hikaru-share-docs/development-details.md` | [link](https://github.com/LittleYe233/hikaru-share-docs/blob/main/development-details.md) | [link](https://gitee.com/littleye233/hikaru-share-docs/blob/main/development-details.md) |
 | 知识库 | `hikaru-share-docs/knowledge-base` | [link](https://github.com/LittleYe233/hikaru-share-docs/tree/main/knowledge-base) | [link](https://gitee.com/littleye233/hikaru-share-docs/tree/main/knowledge-base) |

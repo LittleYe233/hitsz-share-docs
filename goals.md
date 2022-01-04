@@ -2,7 +2,7 @@
 
 ## 简介
 
-本文件系 Hikaru Share 项目有关预期目标和内容解释的部分. 有关项目更详细的开发细节, 参见[开发细节](/development_details.md).
+本文件系 Hikaru Share 项目有关预期目标和内容解释的部分. 有关项目更详细的开发细节, 参见[开发细节](/development-details.md).
 
 ## 预期目标
 
