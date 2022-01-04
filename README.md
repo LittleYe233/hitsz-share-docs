@@ -12,7 +12,7 @@
 | :-: | :-: |
 | hikaru-share-docs | 项目总览和总体规划 |
 | hikaru-share-tracker | 项目使用的 Tracker 服务器服务端代码 |
-| hikaru-share-web | 项目使用的网站服务端和客户端代码 |
+| hikaru-share-web | 项目使用的网站服务端代码 |
 
 ## 镜像
 
@@ -36,3 +36,5 @@
 | hikaru-share-tracker 仓库 | `hikaru-share-tracker` | [link](https://github.com/LittleYe233/hikaru-share-tracker) | [link](https://gitee.com/littleye233/hikaru-share-tracker) |
 | hikaru-share-web 仓库 | `hikaru-share-web` | [link](https://github.com/LittleYe233/hikaru-share-web) | [link](https://gitee.com/littleye233/hikaru-share-web) |
 | 项目目标 | `hikaru-share-docs/goals.md` | [link](https://github.com/LittleYe233/hikaru-share-docs/blob/main/goals.md) | [link](https://gitee.com/littleye233/hikaru-share-docs/blob/main/goals.md) |
+| 开发细节 | `hikaru-share-docs/development_details.md` | [link](https://github.com/LittleYe233/hikaru-share-docs/blob/main/development_details.md) | [link](https://gitee.com/littleye233/hikaru-share-docs/blob/main/development_details.md) |
+| 知识库 | `hikaru-share-docs/knowledge-base` | [link](https://github.com/LittleYe233/hikaru-share-docs/tree/main/knowledge-base) | [link](https://gitee.com/littleye233/hikaru-share-docs/tree/main/knowledge-base) |
