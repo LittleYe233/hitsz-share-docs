@@ -10,7 +10,20 @@
 
 > Tracker 本质上是一种可以接受 HTTP GET 请求的 HTTP/HTTPS 服务. BitTorrent 客户端需要定期向 Tracker 发送 HTTP GET 请求, 其中包含对于该种子的详细信息以及客户端的相关统计数据, Tracker 在接收请求后, 通过一系列操作 (例如数据库操作) 向客户端返回一个应答 (response) , 其中包含该种子对应的节点 (peers) 列表.
 
-因此小组考虑使用 NodeJS 作为服务端实现一个 [RESTful](https://restfulapi.net/) 的 HTTP/HTTPS 服务, 以满足 Tracker 的需求.
+因此项目考虑使用 NodeJS 作为服务端实现一个 [RESTful](https://restfulapi.net/) 的 HTTP/HTTPS 服务, 以满足 Tracker 的需求.
+
+## 处理数据
+
+### Bencode
+
+这是一种数据结构序列化的方式, 支持字符串, 整数, 列表, 字典四种数据类型或容器类型. 根据给定的转换规则, 可以将数据结构经过 Bencode 处理, 或将经过 Bencode 处理的字符串还原为原有数据结构. 具体转换规则如下:
+
+- 字符串: `<字符串长度的十进制表示>:<字符串>`. 例如: `4:spam` 表示字符串 "spam", `0:` 表示字符串 "".
+- 整数: `i<十进制整数>e`. **注意**非零整数不可带有前导零, 且零不可表为 `i-0e`. 例如: `i3e` 表示整数 "3", `i-3e` 表示整数 "-3".
+- 列表: `l<经过 Bencode 处理的元素>e`. 例如: `l1:1i2eli3eed1:4i4eee` 表示列表 "\['1', 2, \[3\], {'4': 4}\]", `le` 表示列表 "\[\]".
+- 字典: `d<经过 Bencode 处理的字符串>:<经过 Bencode 处理的元素>`. 例如: `d1:11:11:2i2e1:3li3ee1:4d1:51:5ee` 表示字典 "{'1': '1', '2': 2, '3': \[3\], '4': {'5': '5'}}", `de` 表示字典 "{}".
+
+Bencode 相关的序列化工具已有较成熟实现, 请参见 [GitHub](https://github.com/benjreinhart/bencode-js) 相关页面.
 
 ## 请求 (request)
 
