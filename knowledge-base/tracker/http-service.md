@@ -89,6 +89,35 @@ Tracker 向 BitTorrent 客户端发送的应答应当包含如下键:
     - `port`: 节点的 BitTorrent 客户端监听的端口.
   - 二进制模型: 一个节点字符串, 每个节点对应 6 个字节, 前 4 个字节表示节点的主机地址, 后 2 个字节表示端口数.
 
+## 抓取 (scrape) 惯例
+
+惯例上, 绝大多数 Tracker 支持 "抓取" (scrape) 这一形式的请求. 此类请求是 HTTP GET 请求, 欲查询 Tracker 正在管理的某一指定的或所有的种子的状态.
+
+### 目标地址 (scrape URL)
+
+支持此类请求的 Tracker 需要允许 BitTorrent 客户端将请求发送到符合一定要求的目标地址 (scrape URL) 上, 本项目使用 `<协议>://<域名>[:<端口>]/scrape`. Tracker 的应答的 `Content-Type` 值应为 `text/plain`, 其内容应为经过 bencode 的字典, 且可选择对应答纯文本进行 gzip 压缩.
+
+### 请求参数
+
+BitTorrent 客户端向 Tracker 发送的请求应当或可选包含如下键:
+
+- `passkey`: 授权用户的凭证, 为一个固定长度的十六进制串.
+- `info_hash`: **可选项.** 元信息文件中 `info` 键值的经过 URL 编码的 (urlencoded) 20 字节长 SHA1 哈希串. 可以在一次请求中携带多组此键值对, 例如: `?info_hash=a&info_hash=b&info_hash=c`. 若不存在, 则表示查询 Tracker 所有管理的种子.
+
+### 应答参数
+
+Tracker 向 BitTorrent 客户端发送的应答应当或可选包含如下键:
+
+- `files`: 包含每个请求查询的种子对应状态的经过 Bencode 处理的字典. 每个键为一个种子的 `info_hash`, 对应的值也为一个经过 Bencode 处理的字典.
+  - `complete`: 已下载完整种子的节点数量, 即 BitTorrent 客户端中的 "seeders".
+  - `downloaded`: Tracker 登记完成 ("event=complete", 即 BitTorrent 客户端下载结束) 的次数.
+  - `incomplete`: 非 seeder 的节点数量, 即 BitTorrent 客户端中的 "leechers".
+  - `name`: **可选项.** 种子被种子文件的相关数据限定的内部名称.
+
+例如: `d5:filesd20:0123456789abcdef0123d8:completei5e10:downloadedi50e10:incompletei10eeee` 表示字典 "{'files': {'0123456789abcdef0123d8': {'complete': 5, 'downloaded': 50, 'incomplete': 10}}}".
+
+为保证项目代码的简洁性, 部分非官方的可选应答参数将被忽略, 即便仍有极少数 Tracker 服务器和客户端支持.
+
 ## 参考文献
 
 1. [BitTorrentSpecification](https://wiki.theory.org/BitTorrentSpecification#Tracker_HTTP.2FHTTPS_Protocol).TheoryOrg.
