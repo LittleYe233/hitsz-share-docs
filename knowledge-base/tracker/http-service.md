@@ -39,7 +39,7 @@ Tracker 需要获取 HTTP GET 请求中的参数来获取种子和客户端的�
 
 目标地址, 即 BitTorrent 客户端所发送的请求指向的网络位置.
 
-一般格式为 `<协议>://<域名>[:<端口>][/路径]` , 其中:
+一般格式为 `<协议>://<域名>[:<端口>][/路径]`, 其中:
 
 - `<协议>`: 可以是 `http(s)` 或 `udp`, 取决于 Tracker 服务的类型. 本项目中使用 `http` 或 `https` (如果已配置 SSL 证书).
 - `<域名>`: Tracker 服务使用的域名. 本项目中使用符合惯例的 `tracker.<domain>`.
@@ -58,34 +58,34 @@ BitTorrent 客户端向 Tracker 发送的请求应当或可选包含如下键:
 - `downloaded`: 从 BitTorrent 客户端向 Tracker 发送 "started" 事件开始下载总字节数的十进制表示.
 - `left`: BitTorrent 客户端使种子完成率达到 100% 所需的下载字节数的十进制表示.
 - `compact`: 值为 1 表示 BitTorrent 客户端接受紧凑 (compact) 应答——节点列表改为一个节点字符串, 每个节点对应 6 个字节, 前 4 个字节表示节点的主机地址, 后 2 个字节表示端口数.
-- `no_peer_id`: 表示 Tracker 将忽略节点字典中的节点 ID 字段. 若 `compact` 的值为 1 , 该选项将被忽略.
-- `event`: 若存在, 则值只能为 `started` 、 `completed` 、 `stopped` 和空值 (与不存在结果相同) ；若不存在, 可忽略.
+- `no_peer_id`: 表示 Tracker 将忽略节点字典中的节点 ID 字段. 若 `compact` 的值为 1, 该选项将被忽略.
+- `event`: 若存在, 则值只能为 `started`, `completed`, `stopped` 和空值 (与不存在结果相同); 若不存在, 可忽略.
   - `started`: BitTorrent 客户端发送给 Tracker 的首条请求的 `event` 键的必须值.
   - `stopped`: 当 BitTorrent 客户端正常关闭时发送给 Tracker 的请求的 `event` 键的必须值.
   - `completed`: 当 BitTorrent 客户端下载完毕时发送给 Tracker 的请求的 `event` 键的必须值. **注意**若 BitTorrent 客户端启动时种子完成率已经达到 100% , 则 `event` 键不能为此值.
 - `ip`: **可选项.** BitTorrent 客户端机器的*真实* IP 地址, 须为点分隔的 IPv4 地址或符合 [RFC 3513](https://www.rfc-editor.org/rfc/rfc3513) 标准的十六进制 IPv6 地址.
-- `numwant`: **可选项.** BitTorrent 客户端欲从 Tracker 获取的节点数量. 该值允许为 0 . 若不存在, 一般默认为 50 .
-- `trackerid`: **可选项.**值应与上一次声明 (announce) 中的值相同.
+- `numwant`: **可选项.** BitTorrent 客户端欲从 Tracker 获取的节点数量. 该值允许为 0. 若不存在, 一般默认为 50.
+- `trackerid`: **可选项.** 值应与上一次声明 (announce) 中的值相同.
 
 ## 应答 (respond)
 
-Tracker 的应答的 `Content-Type` 值应为 `text/plain` , 其内容应为经过 bencode 的字典.
+Tracker 的应答的 `Content-Type` 值应为 `text/plain`, 其内容应为经过 bencode 的字典.
 
 ### 参数
 
 Tracker 向 BitTorrent 客户端发送的应答应当包含如下键:
 
 - `failure reason`: 若存在, 其他键可以不存在. 值为一段人类可读字符串, 解释请求失败的原因.
-- `warning message`: **可选项.**类似 `failure reason` , 但应答将被正常进行. 警告信息将被视作错误.
+- `warning message`: **可选项.** 类似 `failure reason`, 但应答将被正常进行. 警告信息将被视作错误.
 - `interval`: BitTorrent 客户端发送给 Tracker 下一条定期请求所需要等待的秒数.
 - `min interval`: **可选项.** BitTorrent 客户端最短声明时间间隔.
 - `tracker id`: BitTorrent 客户端在下一次声明中将发回的字符串.
-- `complete`: 已下载完整种子的节点数量, 即 BitTorrent 客户端中的 "seeders" .
-- `incomplete`: 非 seeder 的节点数量, 即 BitTorrent 客户端中的 "leechers" .
+- `complete`: 已下载完整种子的节点数量, 即 BitTorrent 客户端中的 "seeders".
+- `incomplete`: 非 seeder 的节点数量, 即 BitTorrent 客户端中的 "leechers".
 - `peers`: 节点列表, 其格式会受到请求中 `compact` 键的影响. 若可用节点数量超过请求中 `numwant` 键的值或默认值 (50), Tracker 应当自行选择其中部分节点.
   - 字典模型:
-    - `peer id`: 在请求中定义的节点 ID .
-    - `ip`: 节点的 IPv4 地址、 IPv6 地址或 DNS 名称.
+    - `peer id`: 在请求中定义的节点 ID.
+    - `ip`: 节点的 IPv4 地址, IPv6 地址或 DNS 名称.
     - `port`: 节点的 BitTorrent 客户端监听的端口.
   - 二进制模型: 一个节点字符串, 每个节点对应 6 个字节, 前 4 个字节表示节点的主机地址, 后 2 个字节表示端口数.
 
