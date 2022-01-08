@@ -42,8 +42,29 @@
 
 一般来说, 指标式可以使授权用户直观地得出不同信任等级所需的指标, 且无需另行设计额外的转化算法; 经验式可以将判据进一步量化, 便于数据的管理, 减少代码的耦合度.
 
-## Tracker
+## 共享资源 (shared resource)
+
+### Tracker
 
 Tracker 本质上是一种可以接受 HTTP GET 请求的 HTTP/HTTPS 服务. BitTorrent 客户端需要定期向 Tracker 发送 HTTP GET 请求, 其中包含对于该种子的详细信息以及客户端的相关统计数据, Tracker 在接收请求后, 通过一系列操作 (例如数据库操作) 向客户端返回一个应答 (response) , 其中包含该种子对应的节点 (peers) 列表.
 
-有关 Tracker 的请求和应答的格式等, 请参阅知识库[相关章节](/knowledge-base/tracker/requests-and-responses.md).
+有关 Tracker 的请求和应答的格式, 请参阅知识库[相关章节](/knowledge-base/tracker/http-service.md).
+
+### 数据库
+
+Tracker 的数据库需要存储种子和节点的相关信息. 考虑到项目的需求和数据库软件的开源性, 小组使用关系型数据库 MariaDB (MySQL 的一个开源分支) 存储数据.
+
+为避免权限泄露, 小组在服务器上新建一个用户专用于操作相关的数据库, 且限制其更改数据库结构的权限. 小组设计本服务的 Tracker 所需的数据库及其数据表的内部结构如下:
+
+- Tracker 数据库
+  - 种子数据表
+    - `info_hash` 列: 种子的 `info_hash`. **主键**, **分区**, `CHAR(20)`.
+    - `seeders` 列: 种子的所有 seeder 在节点数据表中的 ID 的列表: `JSON ARRAY`.
+    - `leechers` 列: 种子的所有 leecher 在节点数据表中的 ID 的列表: `JSON ARRAY`.
+  - 节点数据表
+    - `id` 列: 节点由数据库软件分配的 ID. **主键**, **自增**, `MEDIUMINT UNSIGNED`.
+    - `peer_id` 列: 参见 [Tracker HTTP GET 请求的参数](/knowledge-base/tracker/http-service.md#参数). `CHAR(20)`.
+    - `ip`: 参见 [Tracker HTTP GET 请求的参数](/knowledge-base/tracker/http-service.md#参数). `VARCHAR(64)` **(暂定长度为 64)**.
+    - `port`: 参见 [Tracker HTTP GET 请求的参数](/knowledge-base/tracker/http-service.md#参数). `SMALLINT UNSIGNED`.
+
+同时, Tracker 还需要访问授权用户数据库, 以判断 BitTorrent 客户端发送的请求带有的 `passkey` 键值是否属于某一授权用户. Tracker 需要向该数据库所在服务器发送请求, 根据应答得到结果.

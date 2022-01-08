@@ -50,7 +50,7 @@ Tracker 需要获取 HTTP GET 请求中的参数来获取种子和客户端的�
 
 BitTorrent 客户端向 Tracker 发送的请求应当或可选包含如下键:
 
-- `passkey`: 授权用户的凭证, 为一个固定长度的十六进制串. **注意**该键将取代 BitTorrent 标准协议中的 `key` 键.
+- `passkey`: 授权用户的凭证, 为一个长度为 16 的十六进制串. **注意**该键将取代 BitTorrent 标准协议中的 `key` 键.
 - `info_hash`: 元信息文件中 `info` 键值的经过 URL 编码的 (urlencoded) 20 字节长 SHA1 哈希串.
 - `peer_id`: BitTorrent 客户端启动时生成的唯一的经过编码的 20 字节长字符串. 有关其的详细信息参见后文[相关章节](#peer_id-参数).
 - `port`: BitTorrent 客户端监听的端口.
@@ -121,7 +121,7 @@ Tracker 向 BitTorrent 客户端发送的应答应当包含如下键:
 
 BitTorrent 客户端向 Tracker 发送的请求应当或可选包含如下键:
 
-- `passkey`: 授权用户的凭证, 为一个固定长度的十六进制串.
+- `passkey`: 授权用户的凭证, 为一个长度为 16 的十六进制串.
 - `info_hash`: **可选项.** 元信息文件中 `info` 键值的经过 URL 编码的 (urlencoded) 20 字节长 SHA1 哈希串. 可以在一次请求中携带多组此键值对, 例如: `?info_hash=a&info_hash=b&info_hash=c`. 若不存在, 则表示查询 Tracker 所有管理的种子.
 
 ### 应答参数
