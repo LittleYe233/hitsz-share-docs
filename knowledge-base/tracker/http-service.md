@@ -138,6 +138,10 @@ Tracker 向 BitTorrent 客户端发送的应答应当或可选包含如下键:
 
 为保证项目代码的简洁性, 部分非官方的可选应答参数将被忽略, 即便仍有极少数 Tracker 服务器和客户端支持.
 
+## 数据库交互
+
+Tracker 需要在本地数据库中存储有关节点的相关信息才能工作, 具体的交互方式是对已有的数据库进行增, 删, 改, 查等基本操作. 对于常见的关系型数据库 (例如: MySQL), NodeJS 已有功能强大的模块可供操作. 有关数据库的相关设计, 参见开发细节的[相关章节](/development-details.md#数据库).
+
 ## 参考文献
 
 1. [BitTorrentSpecification](https://wiki.theory.org/BitTorrentSpecification).TheoryOrg.
