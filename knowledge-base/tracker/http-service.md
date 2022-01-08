@@ -29,7 +29,7 @@
 - 列表: `l<经过 Bencode 处理的元素>e`. 例如: `l1:1i2eli3eed1:4i4eee` 表示列表 "\['1', 2, \[3\], {'4': 4}\]", `le` 表示列表 "\[\]".
 - 字典: `d<经过 Bencode 处理的字符串>:<经过 Bencode 处理的元素>`. 例如: `d1:11:11:2i2e1:3li3ee1:4d1:51:5ee` 表示字典 "{'1': '1', '2': 2, '3': \[3\], '4': {'5': '5'}}", `de` 表示字典 "{}".
 
-Bencode 相关的序列化工具已有较成熟实现, 请参见 [GitHub](https://github.com/benjreinhart/bencode-js) 相关页面.
+Bencode 相关的序列化工具已有较成熟实现, 请参见 GitHub [相关页面](https://github.com/benjreinhart/bencode-js).
 
 ## 请求 (request)
 
@@ -52,7 +52,7 @@ BitTorrent 客户端向 Tracker 发送的请求应当或可选包含如下键:
 
 - `passkey`: 授权用户的凭证, 为一个固定长度的十六进制串. **注意**该键将取代 BitTorrent 标准协议中的 `key` 键.
 - `info_hash`: 元信息文件中 `info` 键值的经过 URL 编码的 (urlencoded) 20 字节长 SHA1 哈希串.
-- `peer_id`: BitTorrent 客户端启动时生成的唯一的经过编码的 20 字节长字符串.
+- `peer_id`: BitTorrent 客户端启动时生成的唯一的经过编码的 20 字节长字符串. 有关其的详细信息参见后文[相关章节](#peer_id-参数).
 - `port`: BitTorrent 客户端监听的端口.
 - `uploaded`: 从 BitTorrent 客户端向 Tracker 发送 "started" 事件开始上传总字节数的十进制表示.
 - `downloaded`: 从 BitTorrent 客户端向 Tracker 发送 "started" 事件开始下载总字节数的十进制表示.
@@ -66,6 +66,26 @@ BitTorrent 客户端向 Tracker 发送的请求应当或可选包含如下键:
 - `ip`: **可选项.** BitTorrent 客户端机器的*真实* IP 地址, 须为点分隔的 IPv4 地址或符合 [RFC 3513](https://www.rfc-editor.org/rfc/rfc3513) 标准的十六进制 IPv6 地址.
 - `numwant`: **可选项.** BitTorrent 客户端欲从 Tracker 获取的节点数量. 该值允许为 0. 若不存在, 一般默认为 50.
 - `trackerid`: **可选项.** 值应与上一次声明 (announce) 中的值相同.
+
+### `peer_id` 参数
+
+`peer_id` 是 BitTorrent 客户端启动时生成的唯一的经过编码的 20 字节长字符串, 主要包含 BitTorrent 客户端种类和版本信息和区别于其他 BitTorrent 客户端的随机字符串. 目前被主要使用的两种标准为 Azureus 风格和 Shadow's 风格. 为保证项目代码的简洁性, 项目的 Tracker 将仅支持 Azureus 风格的 `peer_id`, 即便仍有少数 Tracker 服务器和客户端支持 Shadow's 风格.
+
+Azureus 风格的 `peer_id` 形如 `-<两位客户端 ID 字符串><四位数字版本号>-<十二位随机数字标识串>`, 例如: `-AZ2060-0123456789AB` 表示一个版本号 2.0.6, 标识串为 "0123456789AB" 的 Azureus 客户端. 使用此种风格的常见客户端及对应的 ID 字符串如下表:
+
+| 客户端 | ID 字符串 |
+| :-: | :-: |
+| Azureus | AZ |
+| BitComet | BC |
+| BitTorrent Pro | BP |
+| libtorrent | LT |
+| libTorrent | lt |
+| qBittorrent | qB |
+| Transmission | TR |
+| μTorrent for Mac | UM |
+| μTorrent | UT |
+
+Tracker 可以检查请求中的该键的值来限定客户端的种类.
 
 ## 应答 (respond)
 
@@ -120,5 +140,5 @@ Tracker 向 BitTorrent 客户端发送的应答应当或可选包含如下键:
 
 ## 参考文献
 
-1. [BitTorrentSpecification](https://wiki.theory.org/BitTorrentSpecification#Tracker_HTTP.2FHTTPS_Protocol).TheoryOrg.
+1. [BitTorrentSpecification](https://wiki.theory.org/BitTorrentSpecification).TheoryOrg.
 2. [TBSource/announce.php at master · QwertyRider/TBSource](https://github.com/QwertyRider/TBSource/blob/master/announce.php).GitHub.
