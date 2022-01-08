@@ -14,6 +14,12 @@
 
 ## 处理数据
 
+### URL 编码 (urlencode)
+
+一般 URL 会包含一些特殊字符, 可能会给后续的解析和序列化等操作带来麻烦, 因此 BitTorrent 客户端发送给 Tracker 的请求中应当将可能出现的特殊字符编码为受支持的字符串. 此过程可逆. 具体转换规则如下: 对于任何非数字, 字母, ".", "-", "_" 和 "~" 的单字节字符将被编码为形如 `%<二位十六进制字符串>` 的字符串, 其中 `<二位十六进制的字符串>` 为原字符的值的十六进制形式. 多字节字符 (例如: 汉字) 将对其中的每个字节作类似处理. 例如: `%124Vx%9A%BC%DE%F1%23Eg%89%AB%CD%EF%124Vx%9A` 表示字符串 "\x12\x34\x56\x78\x9a\xbc\xde\xf1\x23\x45\x67\x89\xab\xcd\xef\x12\x34\x56\x78\x9a".
+
+相关标准可参阅 [RFC 1738](https://www.rfc-editor.org/rfc/rfc1738) 文档.
+
 ### Bencode
 
 这是一种数据结构序列化的方式, 支持字符串, 整数, 列表, 字典四种数据类型或容器类型. 根据给定的转换规则, 可以将数据结构经过 Bencode 处理, 或将经过 Bencode 处理的字符串还原为原有数据结构. 具体转换规则如下:
@@ -45,7 +51,7 @@ Tracker 需要获取 HTTP GET 请求中的参数来获取种子和客户端的�
 BitTorrent 客户端向 Tracker 发送的请求应当或可选包含如下键:
 
 - `passkey`: 授权用户的凭证, 为一个固定长度的十六进制串. **注意**该键将取代 BitTorrent 标准协议中的 `key` 键.
-- `info_hash`: 元信息文件中 `info` 键值的经过编码的 (urlencoded) 20 字节长 SHA1 哈希串.
+- `info_hash`: 元信息文件中 `info` 键值的经过 URL 编码的 (urlencoded) 20 字节长 SHA1 哈希串.
 - `peer_id`: BitTorrent 客户端启动时生成的唯一的经过编码的 20 字节长字符串.
 - `port`: BitTorrent 客户端监听的端口.
 - `uploaded`: 从 BitTorrent 客户端向 Tracker 发送 "started" 事件开始上传总字节数的十进制表示.
