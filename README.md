@@ -10,9 +10,11 @@
 
 | 代码库名 | 主要内容 |
 | :-: | :-: |
-| hikaru-share-docs | 项目总览和总体规划 |
-| hikaru-share-tracker | 项目使用的 Tracker 服务器服务端代码 |
-| hikaru-share-web | 项目使用的网站服务端代码 |
+| docs | 项目总览和总体规划 |
+| tracker | 项目使用的 Tracker 服务器服务端代码 |
+| web | 项目使用的网站服务端代码 |
+| netdisk-client | 项目"共享网盘"服务客户端代码 |
+| computation-power-client | 项目"共享算力"服务客户端代码 |
 
 ## 镜像
 
@@ -32,9 +34,11 @@
 
 | 内容 | 路径 (相对所在分支) | GitHub | Gitee |
 | :-: | :-: | :-: | :-: |
-| hikaru-share-docs 仓库 | `hikaru-share-docs` | [link](https://github.com/hikarushare/docs) | [link](https://gitee.com/hikarushare/docs) |
-| hikaru-share-tracker 仓库 | `hikaru-share-tracker` | [link](https://github.com/hikarushare/tracker) | [link](https://gitee.com/hikarushare/tracker) |
-| hikaru-share-web 仓库 | `hikaru-share-web` | [link](https://github.com/hikarushare/web) | [link](https://gitee.com/hikarushare/web) |
-| 项目目标 | `hikaru-share-docs/goals.md` | [link](https://github.com/hikarushare/docs/blob/main/goals.md) | [link](https://gitee.com/hikarushare/docs/blob/main/goals.md) |
-| 开发细节 | `hikaru-share-docs/development-details.md` | [link](https://github.com/hikarushare/docs/blob/main/development-details.md) | [link](https://gitee.com/hikarushare/docs/blob/main/development-details.md) |
-| 知识库 | `hikaru-share-docs/knowledge-base` | [link](https://github.com/hikarushare/docs/tree/main/knowledge-base) | [link](https://gitee.com/hikarushare/docs/tree/main/knowledge-base) |
+| docs 仓库 | `docs` | [link](https://github.com/hikarushare/docs) | [link](https://gitee.com/hikarushare/docs) |
+| tracker 仓库 | `tracker` | [link](https://github.com/hikarushare/tracker) | [link](https://gitee.com/hikarushare/tracker) |
+| web 仓库 | `web` | [link](https://github.com/hikarushare/web) | [link](https://gitee.com/hikarushare/web) |
+| netdisk-client 仓库 | `netdisk-client` | [link](https://github.com/hitszshare/netdisk-client) | [link](https://gitee.com/hikarushare/netdisk-client) |
+| computation-power 仓库 | `computation-power` | [link](https://github.com/hitszshare/computation-power) | [link](https://gitee.com/hikarushare/computation-power) |
+| 项目目标 | `docs/goals.md` | [link](https://github.com/hikarushare/docs/blob/main/goals.md) | [link](https://gitee.com/hikarushare/docs/blob/main/goals.md) |
+| 开发细节 | `docs/development-details.md` | [link](https://github.com/hikarushare/docs/blob/main/development-details.md) | [link](https://gitee.com/hikarushare/docs/blob/main/development-details.md) |
+| 知识库 | `docs/knowledge-base` | [link](https://github.com/hikarushare/docs/tree/main/knowledge-base) | [link](https://gitee.com/hikarushare/docs/tree/main/knowledge-base) |

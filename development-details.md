@@ -48,7 +48,7 @@
 
 Tracker 本质上是一种可以接受 HTTP GET 请求的 HTTP/HTTPS 服务. BitTorrent 客户端需要定期向 Tracker 发送 HTTP GET 请求, 其中包含对于该种子的详细信息以及客户端的相关统计数据, Tracker 在接收请求后, 通过一系列操作 (例如数据库操作) 向客户端返回一个应答 (response) , 其中包含该种子对应的节点 (peers) 列表.
 
-有关 Tracker 的请求和应答的格式, 请参阅知识库[相关章节](/knowledge-base/tracker/http-service.md).
+有关 Tracker 的请求和应答的格式, 请参阅知识库[相关章节](/knowledge-base/tracker/http-services.md).
 
 ### 数据库
 
@@ -63,8 +63,8 @@ Tracker 的数据库需要存储种子和节点的相关信息. 考虑到项目�
     - `leechers` 列: 种子的所有 leecher 在节点数据表中的 ID 的列表: `JSON ARRAY`.
   - 节点数据表
     - `id` 列: 节点由数据库软件分配的 ID. **主键**, **自增**, `MEDIUMINT UNSIGNED`.
-    - `peer_id` 列: 参见 [Tracker HTTP GET 请求的参数](/knowledge-base/tracker/http-service.md#参数). `CHAR(20)`.
-    - `ip`: 参见 [Tracker HTTP GET 请求的参数](/knowledge-base/tracker/http-service.md#参数). `VARCHAR(64)` **(暂定长度为 64)**.
-    - `port`: 参见 [Tracker HTTP GET 请求的参数](/knowledge-base/tracker/http-service.md#参数). `SMALLINT UNSIGNED`.
+    - `peer_id` 列: 参见 [Tracker HTTP GET 请求的参数](/knowledge-base/tracker/http-services.md#参数). `CHAR(20)`.
+    - `ip`: 参见 [Tracker HTTP GET 请求的参数](/knowledge-base/tracker/http-services.md#参数). `VARCHAR(64)` **(暂定长度为 64)**.
+    - `port`: 参见 [Tracker HTTP GET 请求的参数](/knowledge-base/tracker/http-services.md#参数). `SMALLINT UNSIGNED`.
 
 同时, Tracker 还需要访问授权用户数据库, 以判断 BitTorrent 客户端发送的请求带有的 `passkey` 键值是否属于某一授权用户. Tracker 需要向该数据库所在服务器发送请求, 根据应答得到结果.
