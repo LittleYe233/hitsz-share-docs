@@ -24,10 +24,6 @@
 
 暂无.
 
-## 许可证
-
-若无特别说明, 本项目相关仓库的开源许可证皆为 [Apache-2.0 License](/LICENSE).
-
 ## 跳转
 
 以下将给出本项目的部分内容的跳转链接 (若无特别说明, 所在分支均为 main):
@@ -42,3 +38,11 @@
 | 项目目标 | `docs/goals.md` | [link](https://github.com/hikarushare/docs/blob/main/goals.md) | [link](https://gitee.com/hikarushare/docs/blob/main/goals.md) |
 | 开发细节 | `docs/development-details.md` | [link](https://github.com/hikarushare/docs/blob/main/development-details.md) | [link](https://gitee.com/hikarushare/docs/blob/main/development-details.md) |
 | 知识库 | `docs/knowledge-base` | [link](https://github.com/hikarushare/docs/tree/main/knowledge-base) | [link](https://gitee.com/hikarushare/docs/tree/main/knowledge-base) |
+
+## 许可证
+
+### 本项目
+
+若无特别说明, 本项目相关仓库的开源许可证皆为 [Apache-2.0 License](/LICENSE).
+
+### 其他
