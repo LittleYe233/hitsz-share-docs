@@ -8,7 +8,7 @@
 
 在开发细节的[相关章节](/development-details.md#Tracker)中, 有提到:
 
-> Tracker 本质上是一种可以接受 HTTP GET 请求的 HTTP/HTTPS 服务. BitTorrent 客户端需要定期向 Tracker 发送 HTTP GET 请求, 其中包含对于该种子的详细信息以及客户端的相关统计数据, Tracker 在接收请求后, 通过一系列操作 (例如数据库操作) 向客户端返回一个应答 (response) , 其中包含该种子对应的节点 (peers) 列表.
+> Tracker 本质上是一种可以接受 HTTP GET 请求的 HTTP/HTTPS 服务. BitTorrent 客户端需要定期向 Tracker 发送 HTTP GET 请求, 其中包含对于该种子的详细信息以及客户端的相关统计数据, Tracker 在接收请求后, 通过一系列操作 (例如数据库操作) 向客户端返回一个应答 (response), 其中包含该种子对应的节点 (peers) 列表.
 
 因此项目考虑使用 NodeJS 作为服务端实现一个 [RESTful](https://restfulapi.net/) 的 HTTP/HTTPS 服务, 以满足 Tracker 的需求.
 
