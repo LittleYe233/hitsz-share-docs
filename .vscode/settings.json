@@ -1,0 +1,10 @@
+{
+    "restructuredtext.confPath": "${workspaceFolder}\\docs\\source",
+    "[restructuredtext]": {
+        "editor.quickSuggestions": {
+            "other": false,
+            "comments": false,
+            "strings": false
+        }
+    }
+}
