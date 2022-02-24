@@ -1,22 +1,17 @@
-Welcome to Lumache's documentation!
-===================================
+Hikaru Share Documentation
+==========================
 
-**Lumache** (/lu'make/) is a Python library for cooks and food lovers
-that creates recipes mixing random ingredients.
-It pulls data from the `Open Food Facts database <https://world.openfoodfacts.org/>`_
-and offers a *simple* and *intuitive* API.
+**Hikaru Share** is a project based on BitTorrent protocol as a practice, including front- and back-end web applications and several shared services.
 
-Check out the :doc:`usage` section for further information, including
-how to :ref:`installation` the project.
+The official homepage is on a GitHub organization `hikarushare <https://github.com/hikarushare>`_.
 
 .. note::
 
-   This project is under active development.
+   This project is under active development. Other documentations written in Markdown may be moved here in the future.
 
 Contents
 --------
 
 .. toctree::
 
-   usage
-   api
+   api/index.rst
