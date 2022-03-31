@@ -50,8 +50,8 @@ Tracker 需要获取 HTTP GET 请求中的参数来获取种子和客户端的�
 
 BitTorrent 客户端向 Tracker 发送的请求应当或可选包含如下键:
 
-- `passkey`: 授权用户的凭证, 为一个长度为 16 的十六进制串. **注意**该键将取代 BitTorrent 标准协议中的 `key` 键.
-- `info_hash`: 元信息文件中 `info` 键值的经过 URL 编码的 (urlencoded) 20 字节长 SHA1 哈希串.
+- `passkey`: 授权用户的凭证, 为一个长度为 16 的十六进制串. **注意**该键将取代 BitTorrent 标准协议中的 `key` 键. `key` 键不会被 Tracker 服务器识别为有效参数.
+- `info_hash`: 元信息文件中 `info` 键值的经过 URL 编码 (urlencoded) 的 20 字节长 SHA1 哈希串. 有关其的详细信息参见后文[相关章节](#info_hash-参数).
 - `peer_id`: BitTorrent 客户端启动时生成的唯一的经过编码的 20 字节长字符串. 有关其的详细信息参见后文[相关章节](#peer_id-参数).
 - `port`: BitTorrent 客户端监听的端口.
 - `uploaded`: 从 BitTorrent 客户端向 Tracker 发送 "started" 事件开始上传总字节数的十进制表示.
@@ -66,6 +66,10 @@ BitTorrent 客户端向 Tracker 发送的请求应当或可选包含如下键:
 - `ip`: **可选项.** BitTorrent 客户端机器的*真实* IP 地址, 须为点分隔的 IPv4 地址或符合 [RFC 3513](https://www.rfc-editor.org/rfc/rfc3513) 标准的十六进制 IPv6 地址.
 - `numwant`: **可选项.** BitTorrent 客户端欲从 Tracker 获取的节点数量. 该值允许为 0. 若不存在, 一般默认为 50.
 - `trackerid`: **可选项.** 值应与上一次声明 (announce) 中的值相同.
+
+### `info_hash` 参数
+
+`info_hash` 是元信息文件中 `info` 键值的经过 URL 编码的 (urlencoded) 20 字节长 SHA1 哈希串 (长度为 40 的十六进制串). BitTorrent 客户端获取到种子的元信息是由 Bencode 序列化的字符串, 解序列化后得到一个字典. 其中对 `info` 键的值 (也是一个字典) 再经 Bencode 序列化后的字符串经 SHA1 哈希化后, 得到的串则是磁力链接和 BitTorrent 客户端中显示的 "File Hash" 串. 而将其两两组合成 20 个八位无符号整数, 最后对这个长度为 20 的字符串经过 URL 编码 (urlencoded) 后得到的转义串即是 `info_hash` 参数的值.
 
 ### `peer_id` 参数
 
